@@ -8,6 +8,7 @@ class MyFirstPage extends StatefulWidget {
 class _MyFirstPageState extends State<MyFirstPage> {
   bool _enabled = false;
   String _msg1 = '';
+  String _msg2 = '';
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,7 @@ class _MyFirstPageState extends State<MyFirstPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Button Functionality Demo'),
+        title: Text('Flutter App 2'),
       ),
       body: Container(
         child: Column(
@@ -73,10 +74,12 @@ class _MyFirstPageState extends State<MyFirstPage> {
                       //_enabled is false.
                       setState(() {
                         if (_enabled) {
-                          _msg1 = 'Enabled';
+                          _msg1 = 'Click Me';
+                          _msg2 = 'Reset';
                           print('_enabled is true');
                         } else {
                           _msg1 = '';
+                          _msg2 = '';
                           print('_enabled is false');
                         }
                       });
@@ -117,6 +120,20 @@ class _MyFirstPageState extends State<MyFirstPage> {
                     child: Text(_msg1),
                   ),
                 ),
+                Container(
+                    margin: EdgeInsets.all(20),
+                    child: MaterialButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)),
+                      elevation: 8,
+                      textColor: Colors.blue.shade100,
+                      color: Colors.blueAccent,
+                      highlightColor: Colors.red,
+                      splashColor: Colors.green.shade300,
+                      padding: EdgeInsets.all(20.0),
+                      onPressed: onPressed1(),
+                      child: Text(_msg2),
+                    ))
               ],
             ),
           ],
