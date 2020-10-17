@@ -9,13 +9,25 @@ class _MyFirstPageState extends State<MyFirstPage> {
   bool _enabled = false;
   String _msg1 = '';
   String _msg2 = '';
+  int counter = 0;
+
+  void _incrementCounter() {
+    setState(() {
+      counter++;
+      print('Count increased');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     Object onPressed1() {
       if (_enabled) {
         print('onPressed1 returning address of anon func but NOT running it');
+        _incrementCounter();
         return () {
+          setState(() {
+            _msg1 = 'Clicked ' + '$counter';
+          });
           print('Anon func now running as button pressed');
           //Because there are no () this anonymous function
           //is NOT called but the address of it is returned to who ever
