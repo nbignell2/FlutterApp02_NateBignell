@@ -13,7 +13,7 @@ class _MyFirstPageState extends State<MyFirstPage> {
 
   void _incrementCounter() {
     setState(() {
-      counter++;
+      counter = counter + 1;
       print('Count increased');
     });
   }
@@ -22,9 +22,9 @@ class _MyFirstPageState extends State<MyFirstPage> {
   Widget build(BuildContext context) {
     Object onPressed1() {
       if (_enabled) {
-        print('onPressed1 returning address of anon func but NOT running it');
-        _incrementCounter();
+        print('Counter increases');
         return () {
+          _incrementCounter();
           setState(() {
             _msg1 = 'Clicked ' + '$counter';
           });
@@ -44,19 +44,22 @@ class _MyFirstPageState extends State<MyFirstPage> {
 
     Object onPressed2() {
       if (_enabled) {
-        print(
-            'onPressed2 returning a null as the result of running the anonymous function');
+        print('onPressed1 returning address of anon func but NOT running it');
         return () {
-          print('Anon func now running, returning a null');
-          //These () are what makes the anonymous function run
-          //every time that onPressed2 is called,
-          //and that happens every time the build runs.
-          //Since the anonymous function does not return anything
-          //a null is sent back to who ever called onPressed2.
-          //This means that the button will never show using onPressed2.
-        }();
+          setState(() {
+            counter = 0;
+            _msg1 = 'Click Me';
+          });
+          print('Anon func now running as button pressed');
+          //Because there are no () this anonymous function
+          //is NOT called but the address of it is returned to who ever
+          //called onPressed1.
+          //This means that the button will now appear and only
+          //when the button is pressed will this anonymous function
+          //run.
+        };
       } else {
-        print('onPressed2 returning NULL');
+        print('onPressed1 returning NULL');
         return null;
       }
     }
@@ -143,7 +146,7 @@ class _MyFirstPageState extends State<MyFirstPage> {
                       highlightColor: Colors.red,
                       splashColor: Colors.green.shade300,
                       padding: EdgeInsets.all(20.0),
-                      onPressed: onPressed1(),
+                      onPressed: onPressed2(),
                       child: Text(_msg2),
                     ))
               ],
